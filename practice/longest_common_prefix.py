@@ -2,9 +2,9 @@ def common_prefix(s1, s2):
 	s = ""
 	for i in range(min(len(s1), len(s2))):
 		if s1[i]==s2[i]:
-			s += s1[i]
+		     s += s1[i]
 		else:
-			break
+		     break
 	return s 
 
 def longest_common_prefix(S):
