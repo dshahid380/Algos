@@ -1,2 +1,2 @@
-# CodeChef-Hackers
-This repository will contain all codes of contests of codechef
+# Algos
+This repository will contains implementations of algorithms.
