@@ -42,8 +42,8 @@ def MODexp(x,n,M):
     return((x%M)*MODexp(x,n-1,M))%M
 
 inp=lambda : int(stdin.readline())
-sip=lambda : input()
-mulip =lambda : map(int,input().split())
+sip=lambda : stdin.readline()
+mulip =lambda : map(int, stdin.readline().split())
 lst=lambda : list(map(int,stdin.readline().split()))
 slst=lambda: list(sip())
 #-------------------------------------------------------
