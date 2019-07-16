@@ -16,7 +16,7 @@ def main():
 	p, q = map(int, input().split())
 	denominator = egyptian(p, q)
 	for i in denominator:
-		print("1/"+str(i))
+		print("1/"+str(i),end=" ")
 
 if __name__ == '__main__':
 	main()
