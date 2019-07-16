@@ -1,2 +1,2 @@
-# CodeChef-Hackers
-This repository will contain all codes of contests of codechef
+# Algorithms Repository
+This repository has implementation of different algorithms written mainly in python.
