@@ -12,7 +12,7 @@ def solve(height):
 
 for _ in range(int(input())):
 	A = [int(x) for x in input().split()]
-	print(solve(A))
+	print(solve(A)) 
 
 
 
