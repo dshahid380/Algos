@@ -1,84 +1,68 @@
-# Python3 program to find the maximum profit 
-# job sequence from a given array of jobs 
-# with deadlines and profits 
-import sys 
+import numpy
+import math
+from sys import stdin,stdout
+from bisect import bisect_left, bisect_right
+M=10**9+7
 
-class DisjointSet: 
-	def __init__(self, n): 
-		self.parent = [i for i in range(n + 1)] 
+def isprime(n) :  
+    if(n<=1) : 
+       return False
+    if(n<=3) : 
+       return True
+    if(n%2==0 or n%3==0) : 
+       return False
+    i=5
+    while(i*i<=n) : 
+        if(n%i==0 or n%(i+2)==0) : 
+           return False
+        i=i+6
+    return True
 
-	def find(self, s): 
-	
-		# Make the parent of nodes in the path from 
-		# u --> parent[u] point to parent[u] 
-		if s == self.parent[s]: 
-			return s 
-		self.parent[s] = self.find(self.parent[s]) 
-		return self.parent[s] 
+def Freq(l): #return freq disctionary   
+    f = {} 
+    for i in l: 
+        if (i in f): 
+            f[i] += 1
+        else:
+          f[i] = 1
+    return f
 
-	# Make us as parent of v 
-	def merge(self, u, v): 
-		
-		# Update the greatest available 
-		# free slot to u 
-		self.parent[v] = u 
-
-def cmp(a): 
-	return a['profit'] 
-
-def findmaxdeadline(arr, n): 
-	""" 
-	:param arr: Job array 
-	:param n: length of array 
-	:return: maximum deadline from the set of jobs 
-	"""
-	ans = - sys.maxsize - 1
-	for i in range(n): 
-		ans = max(ans, arr[i]['deadline']) 
-	return ans 
-
-def printjobscheduling(arr, n): 
-	
-	# Sort jobs in descending order on 
-	# basis of their profit 
-	arr = sorted(arr, key = cmp, reverse = True) 
-
-	""" 
-	Find the maximum deadline among all jobs and 
-	create a disjoint set data structure with 
-	max_deadline disjoint sets initially 
-	"""
-	max_deadline = findmaxdeadline(arr, n) 
-	ds = DisjointSet(max_deadline) 
-
-	for i in range(n): 
-
-		# find maximum available free slot for 
-		# this job (corresponding to its deadline) 
-		available_slot = ds.find(arr[i]['deadline']) 
-		if available_slot > 0: 
-            #print(ds.Print())
-			# This slot is taken by this job 'i' 
-			# so we need to update the greatest free slot. 
-			# Note: In merge, we make first parameter 
-			# as parent of second parameter. 
-			# So future queries for available_slot will 
-			# return maximum available slot in set of 
-			# "available_slot - 1" 
-			ds.merge(ds.find(available_slot - 1), 
-							available_slot) 
-			print(arr[i]['id'], end = " ") 
-
-# Driver Code 
-if __name__ == "__main__": 
-	arr = [{'id': 'a', 'deadline': 2, 'profit': 100}, 
-		{'id': 'b', 'deadline': 1, 'profit': 19}, 
-		{'id': 'c', 'deadline': 2, 'profit': 27}, 
-		{'id': 'd', 'deadline': 1, 'profit': 25}, 
-		{'id': 'e', 'deadline': 3, 'profit': 15}] 
-	n = len(arr) 
-	print("Following jobs need to be", 
-		"executed for maximum profit") 
-	printjobscheduling(arr, n) 
-
-# This code is contributed by Rajat Srivastava 
+inp=lambda : int(stdin.readline())
+sip=lambda : stdin.readline()
+mulip =lambda : map(int, stdin.readline().split())
+lst=lambda : list(map(int,stdin.readline().split()))
+slst=lambda: list(sip())
+#-------------------------------------------------------
+for _ in range(inp()):
+    S = slst()
+    one = [0]*(len(S))
+    zero = [0]*(len(S))
+    cnt=0
+    cnt2 = 0
+    for i in range(len(S)):
+        if S[i]=="1":
+            cnt+=1
+        else:
+            cnt2+=1
+        one[i]=cnt
+    
+    for i in range(len(S)):
+        if S[i]=="0":
+            cnt2+=1
+        zero[i]=cnt2
+    cnt=0
+    for i in range(1, len(S)+1):
+  
+            if pow(j, 2) + j > i:
+                break
+            if i-j*j-j-1 < 0:   
+                cnt1= one[i-1]
+                cnt0 = zero[i-1]
+            else:
+                cnt1= one[i-1] - one[i-j*j-j-1]
+                cnt0 = zero[i-1] - zero[i-j*j-j-1]
+            if pow(cnt1, 2) ==cnt0:
+                cnt += 1
+            j += 1
+    stdout.write(str(cnt)+"\n")
+  
