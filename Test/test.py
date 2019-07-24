@@ -40,25 +40,7 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 #-------------------------------------------------------
 
-def solve(A, x):
-  l, r = 0, len(A)-1
-  diff = sys.maxsize 
-  #val1, val2 = 0, 0
-  while(l < r):
-     if abs(A[l] + A[r] - x) < diff:
-        val1, val2 = l, r 
-        diff = abs(A[l] + A[r] - x)
-
-     if A[l] + A[r] > x:
-        r -= 1
-     else:
-        l += 1
-  return (A[val1], A[val2])
-
-for _ in range(int(input())):
-   x = int(input())
-   A = [int(x) for x in input().split()]
-   print(*solve(A, x))
+print(isprime(100000001))
 
 
     

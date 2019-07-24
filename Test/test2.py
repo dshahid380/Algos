@@ -1,8 +1,6 @@
-import numpy
 import math
-from sys import stdin,stdout
+from sys import stdin,stdout, maxsize
 from bisect import bisect_left, bisect_right
-M=10**9+7
 
 def isprime(n) :  
     if(n<=1) : 
@@ -18,7 +16,7 @@ def isprime(n) :
         i=i+6
     return True
 
-def Freq(l): #return freq disctionary   
+def freq(l): #return freq disctionary   
     f = {} 
     for i in l: 
         if (i in f): 
@@ -33,36 +31,40 @@ mulip =lambda : map(int, stdin.readline().split())
 lst=lambda : list(map(int,stdin.readline().split()))
 slst=lambda: list(sip())
 #-------------------------------------------------------
-for _ in range(inp()):
-    S = slst()
-    one = [0]*(len(S))
-    zero = [0]*(len(S))
-    cnt=0
-    cnt2 = 0
-    for i in range(len(S)):
-        if S[i]=="1":
-            cnt+=1
-        else:
-            cnt2+=1
-        one[i]=cnt
-    
-    for i in range(len(S)):
-        if S[i]=="0":
-            cnt2+=1
-        zero[i]=cnt2
-    cnt=0
-    for i in range(1, len(S)+1):
+
+def find_max_cost(a,size, k, m): 
   
-            if pow(j, 2) + j > i:
-                break
-            if i-j*j-j-1 < 0:   
-                cnt1= one[i-1]
-                cnt0 = zero[i-1]
-            else:
-                cnt1= one[i-1] - one[i-j*j-j-1]
-                cnt0 = zero[i-1] - zero[i-j*j-j-1]
-            if pow(cnt1, 2) ==cnt0:
-                cnt += 1
-            j += 1
-    stdout.write(str(cnt)+"\n")
+    max_so_far = -maxsize - 1
+    max_ending_here = 0
+    start = 0
+    end = 0
+    s = 0
+  
+    for i in range(0,size): 
+  
+        max_ending_here += a[i] 
+  
+        if max_so_far < max_ending_here: 
+            max_so_far = max_ending_here 
+            start = s 
+            end = i 
+  
+        if max_ending_here < 0: 
+            max_ending_here = 0
+            s = i+1
+  
+    ans = max_so_far - k*math.ceil((end-start+1)/m) 
+    return ans
+    
+
+n, m, k = mulip()
+A = lst()
+print(find_max_cost(A, n, k, m))
+
+
+
+
+
+
+
   

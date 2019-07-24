@@ -1,4 +1,4 @@
-def generate_primes(n):
+def sieve(n):
 	prime_bool = [True]*(n+1)
 	i = 2
 	while(i*i<=n):
