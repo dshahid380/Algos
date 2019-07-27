@@ -17,21 +17,22 @@ void phii(){
 void preprocess(){
   phii();	
   for(ll i=1; i<=MAX; i++){
-  	for(ll j=i; j<=MAX; j+=i){
-  	  A[j] += (i*phi[i]);	
+  	for(ll j=2*i; j<=MAX; j+=i){
+  	  A[j] += (i*phi[j/i]);	
 	}
   }	
+  for(ll i=1; i<MAX; i++) A[i]+=A[i-1];
 }
 
 int main(){
   preprocess();
-  ll T;
-  cin>>T;
-  while(T--){
-	ll n;
-	cin>>n;
-	ll ans = (n*(A[n]+1))/2;
-	cout<<ans<<endl;
+  while(true){
+  	ll n;
+  	cin>>n;
+  	if(n==0)
+  	   break;
+  	cout<<A[n]<<endl;
+  	
   }
   return 0;	
 }
