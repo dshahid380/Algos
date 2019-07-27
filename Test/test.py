@@ -45,16 +45,35 @@ def isprime(n):
       return False
   return True
 
+def getPar(v):
+    if v not in par:
+        par[v] = v
+    if par[v]==v:
+        return v
+    else:
+        par[v]=getPar(par[v])
+        return par[v]
 
-N, Q = mulip()
-A = lst()
-M = [0]*(N+1)
-for i in range(N):
-    if A[i]==3 or A[i]==4 or A[i]==6:
-        M[i+1] = 1
-for i in range(1,N+1):
-    M[i] += M[i-1]
 
-for i in range(Q):
-    l, r = mulip()
-    print(M[r]-M[l-1])
+for _ in range(inp()):
+    N, Q = mulip()
+    sm = 0 
+    par = defaultdict(int)
+    for _ in range(Q):
+        A = lst()
+        if len(A)==2:
+            x = A[1]+sm 
+            if x==0:
+                par[x] = 0
+            else:
+                par[x] = x-1
+        else:
+            l, r = A[1]+sm, A[2]+sm
+            p = getPar(r)
+            if p<l:
+                print(0)
+            else:
+                print(p)
+                sm = (sm+p)%N 
+            #print("sm:",sm)
+  
