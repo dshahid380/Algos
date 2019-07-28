@@ -1,6 +1,7 @@
 import math
 from sys import stdin,stdout
 from bisect import bisect_left, bisect_right
+from copy import deepcopy
 
 def isprime(n):  
     if(n<=1): 
@@ -31,33 +32,40 @@ mulip =lambda : map(int, stdin.readline().split())
 lst=lambda : list(map(int,stdin.readline().split()))
 slst=lambda: list(sip())
 #-------------------------------------------------------
+def Sum(A):
+    ans = 0
+    for i in range(len(A)):
+        ans += A[i]*(i+1)
+    return ans 
+
+
 for _ in range(inp()):
-    n = inp()
-    maxx, maxy, minx, miny = MAX, MAX, -MAX, -MAX
-    for _ in range(n):
-        x, y, f1, f2, f3, f4 = mulip()
-        if f2==0:
-            maxy = min(maxy, y)
-        if f4==0:
-            miny = max(miny, y)
-        if f3==0:
-            maxx = min(maxx, x)
-        if f1==0:
-            minx = max(minx, x)
-    if minx <= maxx and miny <= maxy:
-        print(1,minx,miny)
+    N = inp()
+    A = lst()
+    s = Sum(A)
+    if N==1:
+        print(s)
+    elif N==2:
+        ans = min(A)*1 + max(A)*2
+        print(ans)
     else:
-        print(0)
+        avail = [False]*N
+        for i in range(1, len(A)-1):
+            if A[i-1] > A[i] and A[i] > A[i+1] and avail[i]==False and avail[i-1]==False:
+                x = A[i-1] - A[i]
+                y = A[i] - A[i+1]
+                if y > x:
+                    s += y
+                    avail[i],avail[i+1] = True, True
+                else:
+                    s += x
+                    avail[i],avail[i-1] = True, True
 
+            elif A[i-1] > A[i] and A[i] < A[i+1] and avail[i-1]==False and avail[i]==False:
+                s += A[i-1] - A[i]
+                avail[i-1],avail[i] = True, True
+            elif A[i-1] < A[i] and A[i] > A[i+1] and avail[i]==False and avail[i+1]==False:
+                s += A[i] - A[i+1]
+                avail[i], avail[i+1]=True, True
+        print(s)
 
-    
-
-
-
-
-
-
-
-  
-
-  
