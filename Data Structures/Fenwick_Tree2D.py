@@ -1,3 +1,7 @@
+"""2D fenwick tree gives the same result as 1D, the difference is that
+it performs the range operations in two point in the given array. Assume that
+you want to perform operation in a part of rectangle in the given matric array, then
+fenwick tree can a good data structure to use provided there is only point update."""
 def update(x, y, val):
 	i = x
 	while(i < len(A)):
