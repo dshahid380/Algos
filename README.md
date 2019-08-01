@@ -1,2 +1,2 @@
 # Algorithms Repository
-This repository has implementation of different algorithms written mainly in python.
+This repository has implementation of various data structures and algorithms implemented in python and cpp.
