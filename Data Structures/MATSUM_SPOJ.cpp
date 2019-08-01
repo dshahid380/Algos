@@ -33,31 +33,33 @@ void build(int N){
 }
 
 int main() {
-	int N;
-	cin>>N;
-	for(int i=0; i<N; i++){
-	  for(int j=0; j<N; j++) {
-	     tree[i][j] = 0;
-	     A[i][j] = 0;
-	 }
-	}
-	while(true){
-		string t;
-		cin>>t;
-		if(t=="SUM"){
-			int x1, x2, y1, y2;
-			cin>>x1>>y1>>x2>>y2;
-			cout<<query(x1, y1, x2, y2)<<endl;
-		} 
-		else if(t=="SET"){
-			int x, y, val;
-			cin>>x>>y>>val;
-			update(x, y, val-A[x][y], N);
-			A[x][y]=val;
+  int T;
+	scanf("%d",&T);
+	while(T--) {
+		int N;
+		scanf("%d", &N);
+		memset(tree,0,sizeof tree);
+		memset(A,0,sizeof A);
+	
+		while(true){
+			char t[20];
+			scanf("%s", &t);
+			if(t[2]=='M'){
+				int x1, x2, y1, y2;
+				scanf("%d %d %d %d",&x1, &y1, &x2, &y2);
+				printf("%d \n",query(x1, y1, x2, y2));
+			} 
+			else if(t[2]=='T'){
+				int x, y, val;
+				scanf("%d %d %d", &x, &y, &val);
+				update(x, y, val-A[x][y], N);
+				A[x][y]=val;
+			}
+			else
+		   	break;
 		}
-		else
-		   break;
 	}
+	return 0;
 }
 
 
