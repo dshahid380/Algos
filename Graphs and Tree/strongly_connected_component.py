@@ -33,9 +33,6 @@ def get_transpose(adj):
     return A 
 
 
-
-
-
 for _ in range(int(input())):
 
     # Number of nodes and edges

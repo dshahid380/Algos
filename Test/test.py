@@ -15,65 +15,35 @@ slst=lambda: list(sip())
 arr2d= lambda x: [[int(j) for j in input().split()] for i in range(x)]
 odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
+mod = pow(10,9)+7
 #-------------------------------------------------------
-
-def check_composite(n, a, d, s):
-  x = pow(a, d, n)
-  if x==1 or x==n-1:
-    return False
-  for r in range(1, s):
-    x = x * x % n
-    if x==n-1:
-      return False
-  return True
-
-def isprime(n):
-  """Miller-Rabin Algorithm for checking a number is prime or not
-  """  
-  if n<2:
-    return False
-  r = 0 
-  d = n-1
-  while((d&1)==0):
-    d >>=1
-    r += 1
-  base = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-  for a in base:
-    if n==a:
-      return True
-    if check_composite(n, a, d, r):
-      return False
-  return True
-
-def getPar(v):
-    if v not in par:
-        par[v] = v
-    if par[v]==v:
-        return v
+def find(a):
+    if par[a]==a:
+        return a
     else:
-        par[v]=getPar(par[v])
-        return par[v]
+        par[a] = find(par[a])
+        return par[a]
 
-
-for _ in range(inp()):
-    N, Q = mulip()
-    sm = 0 
-    par = defaultdict(int)
+for _ in range(int(input())):
+    N = inp()
+    s = lst()
+    par = [int(x) for x in range(N)]
+    Q = inp()
     for _ in range(Q):
-        A = lst()
-        if len(A)==2:
-            x = A[1]+sm 
-            if x==0:
-                par[x] = 0
-            else:
-                par[x] = x-1
+        q = lst()
+        if len(q)==3:
+            a = find(q[1]-1)
+            b = find(q[2]-1)
+            if a==b:
+               print("Invalid query!")
+            elif s[a] > s[b]:
+                par[b] = a 
+            elif s[a] < s[b]:
+                par[a] = b 
+               
         else:
-            l, r = A[1]+sm, A[2]+sm
-            p = getPar(r)
-            if p<l:
-                print(0)
-            else:
-                print(p)
-                sm = (sm+p)%N 
-            #print("sm:",sm)
-  
+            print(find(q[1]-1)+1)
+
+
+
+

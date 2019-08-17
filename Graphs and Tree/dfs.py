@@ -11,6 +11,9 @@ def dfs(s):
     else:
         visited[s] = True
         for u in adj[s]:
+            if visited[u]==False:
+                distance[u] = distance[s] + 1
+                print(u, end=" ")
             dfs(u)
 
 for _ in range(int(input())):
@@ -19,13 +22,14 @@ for _ in range(int(input())):
     N, M = map(int, input().split())
     adj = defaultdict(list)
     visited = [False]*(N+1)
-    distance = [0]*(N+1)
+    distance = [-1]*(N+1)
 
     for _ in range(M):
         u, v = map(int, input().split())
         add_edge(u, v)
-
+    distance[1]=0
     dfs(1)
+    
     
 
 
