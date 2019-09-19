@@ -4,6 +4,8 @@ from heapq import heappop
 from heapq import heappush
 from heapq import heapify
 from bisect import insort
+from bisect import bisect_left
+from bisect import bisect_right
 from sys import stdin,stdout
 from collections import defaultdict
 
@@ -17,33 +19,46 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 mod = pow(10,9)+7
 #-------------------------------------------------------
-def find(a):
-    if par[a]==a:
-        return a
+def sieve(n):
+    prime_bool = [True]*(n+1)
+    i = 2
+    while(i*i<=n):
+        if prime_bool[i]:
+            j = i*i 
+            while(j<=n):
+                prime_bool[j] = False
+                j += i 
+        i += 1 
+
+    primes = {}
+    for i in range(2,1+n):
+        if prime_bool[i]:
+            primes[i]=i 
+
+    return primes
+MAX = 1000006
+p = sieve(MAX)
+count = [0]*MAX
+
+for i in range(2,1000006):
+    if i in p:
+        count[i] = count[i-1]+1
     else:
-        par[a] = find(par[a])
-        return par[a]
-
-for _ in range(int(input())):
+        count[i]=count[i-1]
+    
+for _ in range(inp()):
     N = inp()
-    s = lst()
-    par = [int(x) for x in range(N)]
-    Q = inp()
-    for _ in range(Q):
-        q = lst()
-        if len(q)==3:
-            a = find(q[1]-1)
-            b = find(q[2]-1)
-            if a==b:
-               print("Invalid query!")
-            elif s[a] > s[b]:
-                par[b] = a 
-            elif s[a] < s[b]:
-                par[a] = b 
-               
-        else:
-            print(find(q[1]-1)+1)
+    if N==1:
+        print(0)
+    elif N==2 or N==3:
+        print(1)
+    elif N%2==0:
+        print(count[N//2])
+    else:
+        print(count[N]-1)
 
+        
+        
 
 
 

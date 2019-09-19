@@ -1,50 +1,44 @@
-import math
-from collections import defaultdict, deque
+import sys
+from heapq import heappop
+from heapq import heappush
+from heapq import heapify
+from bisect import insort
+from bisect import bisect_right
+from bisect import bisect_left
 from sys import stdin,stdout
-from bisect import bisect_left, bisect_right
-from copy import deepcopy
+from collections import defaultdict
 
 inp=lambda : int(stdin.readline())
-sip=lambda : stdin.readline()
-mulip =lambda : map(int, stdin.readline().split())
+sip=lambda : input()
+mulip =lambda : map(int,input().split())
 lst=lambda : list(map(int,stdin.readline().split()))
 slst=lambda: list(sip())
-M = pow(10,9)+7
+arr2d= lambda x: [[int(j) for j in input().split()] for i in range(x)]
+odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
+evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
+mod = pow(10,9)+7
 #-------------------------------------------------------
-def find(v):
-	
-	
-       
-
-
-
 for _ in range(inp()):
-	N = inp()
-	p1, p2, p3 = mulip()
-	adj = defaultdict(list)
-	for i in range(N-1):
-		u, v = mulip()
-		adj[v].append(u)
-		adj[u].append(v)
-	flag=0
-	for i in adj:
-		if len(adj[i])==N-1:
-			flag=1
-			center=i 
-			break
-
-	if flag==1:
-		if p2==1:
-			n = N- center
-			ans = n*(n-1)
-			print(ans>>1)
-		elif p2==2:
-			n = N - center
-			n1 = center - 1
-			print(n*n1)
-		else:
-			n1 = center - 1
-			ans = n1*(n1-1)
-			print(ans>>1)
-	else:
-		print(N//2)
+    R, C, K = mulip()
+    A = arr2d(R)
+    dp = [[0]*(C) for i in range(R)]
+    for i in range(R):
+    	for j in range(C):
+    		if i==0:
+    			dp[i][j]=A[i][j]
+    		if i-1-K<0:
+    			if i-1>=0 and j-1>=0 and j+1<R:
+    				dp[i][j] = max(dp[i-1][j-1],dp[i-1][j+1])+A[i][j]
+    			elif i-1>=0 and j-1>=0 and j+1>=R:
+    				dp[i][j] = dp[i-1][j-1] + A[i][j]
+    			elif i-1>=0 and j-1<0 and j+1<R:
+    				dp[i][j] = dp[i-1][j+1] + A[i][j]
+    		else:
+    			if j-1>=0 and j+1<R:
+    				dp[i][j] = max(max(dp[i-1][j-1],dp[i-1][j+1]),max(dp[i-K-1][j-1],dp[i-K-1][j+1])) +A[i][j]
+    			elif j-1>=0 and j+1>=R:
+    				dp[i][j] = max(dp[i-1][j-1],dp[i-K-1][j-1]) + A[i][j]
+    			elif j-1<0 and j+1<R:
+    				dp[i][j] = max(dp[i-1][j+1],dp[i-K-1][j+1]) + A[i][j]
+    
+    print(max(dp[R-1]))
