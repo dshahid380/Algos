@@ -11,10 +11,7 @@ lst=lambda : list(map(int,stdin.readline().split()))
 slst=lambda: list(sip())
 M = pow(10,9)+7
 #-------------------------------------------------------
-for _ in range(inp()):
-    A, B = mulip()
-    X = lst()
-    print("Yes")
+
     
 
 

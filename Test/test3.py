@@ -18,27 +18,37 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 mod = pow(10,9)+7
 #-------------------------------------------------------
+from collections import defaultdict
+def fresh_job(A, i):
+    for j in range(i-1,-1,-1):
+        if A[j][0] <= A[i][1]:
+            return j 
+    return -1
+
+def maxEvents(arrival, duration):
+    A = []
+    n = len(arrival)
+    for i in range(n):
+        start = arrival[i]
+        finish = arrival[i] + duration[i]
+        A.append([finish,start,1])
+
+    A = sorted(A)
+    dp = [0]*(n+1)
+    dp[0] = 1
+    for i in range(1,n):
+        cnt = 1
+        l = fresh_job(A, i)
+        if(l!=-1):
+             cnt += dp[l]
+        dp[i] = max(cnt, dp[i-1])
+    res = dp[n-1]
+    return res 
+
+
 for _ in range(inp()):
-    R, C, K = mulip()
-    A = arr2d(R)
-    dp = [[0]*(C) for i in range(R)]
-    for i in range(R):
-    	for j in range(C):
-    		if i==0:
-    			dp[i][j]=A[i][j]
-    		if i-1-K<0:
-    			if i-1>=0 and j-1>=0 and j+1<R:
-    				dp[i][j] = max(dp[i-1][j-1],dp[i-1][j+1])+A[i][j]
-    			elif i-1>=0 and j-1>=0 and j+1>=R:
-    				dp[i][j] = dp[i-1][j-1] + A[i][j]
-    			elif i-1>=0 and j-1<0 and j+1<R:
-    				dp[i][j] = dp[i-1][j+1] + A[i][j]
-    		else:
-    			if j-1>=0 and j+1<R:
-    				dp[i][j] = max(max(dp[i-1][j-1],dp[i-1][j+1]),max(dp[i-K-1][j-1],dp[i-K-1][j+1])) +A[i][j]
-    			elif j-1>=0 and j+1>=R:
-    				dp[i][j] = max(dp[i-1][j-1],dp[i-K-1][j-1]) + A[i][j]
-    			elif j-1<0 and j+1<R:
-    				dp[i][j] = max(dp[i-1][j+1],dp[i-K-1][j+1]) + A[i][j]
+    n = inp()
+    arrival = lst()
+    duration = lst()
+    print(maxEvents(arrival, duration))
     
-    print(max(dp[R-1]))

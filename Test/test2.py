@@ -18,18 +18,56 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 mod = pow(10,9)+7
 #-------------------------------------------------------
-from math import log,ceil 
-n,b = mulip()
-x = b*b*int(log(2*n+1))
-ans = 0 
-tmp = 0
-for i in range(1,n+1):
-    ans += (b*b)//i
-    tmp += 1/i 
-tmp = b*b*tmp 
-print("Actual :",ans)
-print("calculated1 :",int(x))
-print("calculated2 :",int(tmp))
+d = {"&":1, "|":2, "^":3}
+
+def op(a,o,b):
+	if o==1:
+		return a&b 
+	elif o==2:
+		return a|b 
+	else:
+		return a^b 
+
+def solve(l):
+	#print(*l)
+	if len(l)==1:
+		return int(l[0])
+		
+	if len(l)==3:
+		return op(int(l[0]),d[l[1]],int(l[2]))
+	
+	ans = 0 
+	for i in range(len(l)):
+		if i%2==1:
+			x1 = op(solve(l[:i]),d[l[i]],solve(l[i+1:]))
+			ans = max(ans,x1)
+			print(ans,":",*l)
+	return ans
+
+for i in range(inp()):
+	s = list(input())
+	L = []
+	tmp = ""
+	for i in s:
+		if i not in d:
+			tmp+=i 
+		else:
+			L.append(tmp)
+			L.append(i)
+			tmp=""
+	if tmp!="":
+		L.append(tmp)
+
+	print(solve(L))
+	#print(*l)
+
+
+
+
+	
+
+
+
 
 
 
