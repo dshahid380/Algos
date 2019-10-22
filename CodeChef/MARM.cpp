@@ -18,6 +18,7 @@ using namespace std;
 #define pb push_back 
 #define mp make_pair
 #define For(i,a,b) for(int i=a; i<b; ++i) 
+#define rep(i,a,b) for(ll i=a; i<b; ++i)
 #define mod 1000000007 
 
 int main() { 
@@ -27,33 +28,29 @@ int main() {
   int T;
   cin>>T;
   while(T--) {
-     int n,cnt=0;
-     cin>>n;
-     int A[n],cnt=0;
-     vvi v(1000005);
-     For(i,0,n) {
-          cin>>A[i];
-          v[A[i]].pb(i);
-         } 
-         vi dp(maxarr(A)+2,0);
-         
-         For(i,0,n) {
-             umap<int,int> st;
-             //cout<<A[i]<<" :: "<<endl;
-             For(j,1,sqrt(A[i])+1){
-                cnt++;
-             } 
-                for(auto x : st)
-                   dp[x.first]++;
-                //cout<<endl;
-         }
-         For(i,0,maxarr(A)+1) {
-              if(v[i].size()>0) 
-                 dp[i]+=v[i].size()-1;
-         }
-         cout<<maxvec(dp)<<"\n";
-         //For(i,0,maxarr(A)+1) cout<<dp[i]<<" ";    
-         
-    }
-    return 0;
+  	ll K,N,rem=0;
+  	cin>>N>>K;
+  	ll A[N];
+  	rep(i,0,N) cin>>A[i];
+  	if(N%2==0) {
+  		 rep(i,0,(K%(3*N)))
+  		    A[i%N] = A[i%N]^A[N-1-i%N];
+		}
+		else {
+			 if(K<3*N) {
+			 	 rep(i,0,K) 
+			 	    A[i%N] = A[i%N]^A[N-1-i%N];
+			 }
+			 else{
+			 	 ll rem = K%(3*N);
+			 	 rep(i,0,3*N+rem) 
+			 	 		A[i%N] = A[i%N]^A[N-1-i%N];
+			 }
+		}
+		rep(i,0,N) 
+		  cout<<A[i]<<" ";
+		cout<<endl;
+	}
+  return 0;
 }
+

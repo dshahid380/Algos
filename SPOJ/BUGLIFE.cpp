@@ -19,7 +19,7 @@ bool bfs(int s) {
           q.pop();
           for(auto u : adj[v]) {
               if(color[u]==INF) {
-                  color[u] = 1- color[v];
+                  color[u] = 1 - color[v];
                   q.push(u);
                   used[u] = true;
                      }

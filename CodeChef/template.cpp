@@ -18,6 +18,7 @@ using namespace std;
 #define pb push_back 
 #define mp make_pair
 #define For(i,a,b) for(int i=a; i<b; ++i) 
+#define rep(i,a,b) for(ll i=a; i<b; ++i)
 #define mod 1000000007 
 
 int main() { 
@@ -27,33 +28,39 @@ int main() {
   int T;
   cin>>T;
   while(T--) {
-     int n,cnt=0;
-     cin>>n;
-     int A[n],cnt=0;
-     vvi v(1000005);
-     For(i,0,n) {
-          cin>>A[i];
-          v[A[i]].pb(i);
-         } 
-         vi dp(maxarr(A)+2,0);
-         
-         For(i,0,n) {
-             umap<int,int> st;
-             //cout<<A[i]<<" :: "<<endl;
-             For(j,1,sqrt(A[i])+1){
-                cnt++;
+     int N;
+     cin>>N;
+     if(N%2==0)
+        cout<<"NO"<<endl;
+     else {
+        cout<<"YES"<<endl;
+        int A[101][101];
+        For(i,1,N+1) {
+          int K=N/2;
+          For(j,1,N+1) {
+             if(i==j)
+                A[i][j]=0;
+             else if(j>i) {
+                if(K>0) {
+                  A[i][j]=1;
+                  A[j][i]=0;
+                  K--;
+                }
+                else {
+                  A[i][j]=0;
+                  A[j][i]=1;
+                }
              } 
-                for(auto x : st)
-                   dp[x.first]++;
-                //cout<<endl;
-         }
-         For(i,0,maxarr(A)+1) {
-              if(v[i].size()>0) 
-                 dp[i]+=v[i].size()-1;
-         }
-         cout<<maxvec(dp)<<"\n";
-         //For(i,0,maxarr(A)+1) cout<<dp[i]<<" ";    
-         
-    }
-    return 0;
+          }
+        }
+        For(i,1,N+1) {
+          For(j,1,N+1) {
+            cout<<A[i][j];
+          }
+          cout<<endl;
+        }
+     }  
+
+  }
+  return 0;
 }

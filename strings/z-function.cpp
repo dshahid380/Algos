@@ -41,7 +41,7 @@ int main() {
 		 	     	 if(Z[i]<maxx) 
 							  ans = i; 
 					}
-				}
+			  }
 		 	     
 		 }
 	}

@@ -18,17 +18,4 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 mod = pow(10,9)+7
 #-------------------------------------------------------
-l, r = mulip()
-f = 0
-for i in range(l,r+1):
-	l = list(str(i))
-	l1 = list(set(l))
-	if len(l1)==len(l):
-		ans = i 
-		f=1
-		break
-if f==0:
-	print(-1)
-else:
-	print(ans)
 

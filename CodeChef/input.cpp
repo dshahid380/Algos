@@ -24,36 +24,17 @@ int main() {
   ios_base::sync_with_stdio(false); 
   cin.tie(NULL); 
   cout.tie(NULL);
-  int T;
-  cin>>T;
+  freopen("input.in","w",stdout);
+  srand(time(NULL));
+  int T=50;
+  cout<<T<<endl;
   while(T--) {
-     int n,cnt=0;
-     cin>>n;
-     int A[n],cnt=0;
-     vvi v(1000005);
-     For(i,0,n) {
-          cin>>A[i];
-          v[A[i]].pb(i);
-         } 
-         vi dp(maxarr(A)+2,0);
-         
-         For(i,0,n) {
-             umap<int,int> st;
-             //cout<<A[i]<<" :: "<<endl;
-             For(j,1,sqrt(A[i])+1){
-                cnt++;
-             } 
-                for(auto x : st)
-                   dp[x.first]++;
-                //cout<<endl;
-         }
-         For(i,0,maxarr(A)+1) {
-              if(v[i].size()>0) 
-                 dp[i]+=v[i].size()-1;
-         }
-         cout<<maxvec(dp)<<"\n";
-         //For(i,0,maxarr(A)+1) cout<<dp[i]<<" ";    
-         
-    }
-    return 0;
+  	int N = rand()%20+1;
+  	int K = rand()%100+1;
+  	cout<<N<<" "<<K<<endl;
+  	For(i,0,N) cout<<rand()%100+1<<" ";
+  	cout<<endl;
+	}
+  return 0;
 }
+
