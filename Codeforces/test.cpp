@@ -1,47 +1,9 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ll unsigned long long int 
-#define vi vector<int> 
-#define vvi vector<vector<int>>
-#define pll pair<ll, ll>
-#define vl vector<ll> 
-#define vvl vector<vector<ll>>
-#define vpll vector<pair<ll,ll>>
-#define umap unordered_map
-#define uset unordered_set
-#define all(c) c.begin(), c.end()
-#define maxarr(A) *max_element(A, A+n) 
-#define maxvec(v) *max_element(all(v)) 
-#define present(map,elem) map.find(elem)!=map.end()
-#define lb(v,elem) (lower_bound(all(v),elem) - v.begin())
-#define ub(v,elem) (upper_bound(all(v),elem) - v.begin())
-#define pb push_back 
-#define mp make_pair
-#define For(i,a,b) for(int i=a; i<b; ++i) 
-#define rep(i,a,b) for(ll i=a; i<b; ++i)
-#define mod 1000000007 
-#define Judge
+#include<iostream>
 
-
-int main() { 
-  ios_base::sync_with_stdio(false); 
-  cin.tie(NULL); 
-  cout.tie(NULL);
-  //#ifdef Judge
-    freopen("input1.in","r",stdin);
-    freopen("output1.in","w",stdout);
-  //#endif
-  int t;
-  cin>>t;
-  while(t--){
-    int n;
-    cin>>n;
-    int A[n];
-    //vi res(n,0);
-    For(i,0,n) cin>>A[i];
-    For(i,0,n) cout<<A[i]<<" ";
-    cout<<endl;
-  }
-  
-  return 0;
-} 
+int main() {
+    if (__cplusplus == 201703L) std::cout << "C++17\n";
+    else if (__cplusplus == 201402L) std::cout << "C++14\n";
+    else if (__cplusplus == 201103L) std::cout << "C++11\n";
+    else if (__cplusplus == 199711L) std::cout << "C++98\n";
+    else std::cout << "pre-standard C++\n";
+}

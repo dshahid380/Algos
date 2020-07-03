@@ -1,1 +1,1 @@
-T = 2
+I am sorry for the inconvenience occured. I am assuming that you have included the above mentioned header files correctly. I have written this code in Dev C++ 5.11 GCC 4.9.2. If you can tell me what compiler you are using like Dev C++ or Code Blocks then i can help you to fix this issue.

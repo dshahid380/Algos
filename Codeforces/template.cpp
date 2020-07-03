@@ -21,6 +21,27 @@ using namespace std;
 #define rep(i,a,b) for(ll i=a; i<b; ++i)
 #define mod 1000000007 
 
+string longPalindrome(string s){
+    string res = s+"#";
+    reverse(s.begin(),s.end());
+    res += s;
+    vector<int> f(res.size()+4);
+    int j = 0;
+    for(int i=1;i<res.size();i++){
+        //int j = f[i-1];
+        while(res[i] != res[j] && j>0){
+            j = f[j-1];
+        }
+        if(res[i] == res[j]){
+            j++;
+        }
+        f[i] = j;
+        //cnt = max(cnt,j);
+    }
+    return res.substr(0,j);
+ 
+}
+
 int main() { 
   ios_base::sync_with_stdio(false); 
   cin.tie(NULL); 

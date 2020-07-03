@@ -1,35 +1,28 @@
-from math import gcd, ceil 
-from collections import defaultdict, deque
+import sys
+from heapq import heappop
+from heapq import heappush
+from heapq import heapify
+from bisect import insort
+from bisect import bisect_right
+from bisect import bisect_left
 from sys import stdin,stdout
-from bisect import bisect_left, bisect_right
-from copy import deepcopy
-
-inp=lambda : int(stdin.readline())
-sip=lambda : stdin.readline()
-mulip =lambda : map(int, stdin.readline().split())
-lst=lambda : list(map(int,stdin.readline().split()))
+from collections import defaultdict, deque
+from math import log2, ceil, floor
+ 
+inp=lambda : int(input())
+sip=lambda : input()
+mulip =lambda : map(int,input().split())
+lst=lambda : list(map(int,input().split()))
 slst=lambda: list(sip())
-M = pow(10,9)+7
-#-----------------------------------------------------
+arr2d= lambda x: [[int(j) for j in input().split()] for i in range(x)]
+odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
+evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
+mod = pow(10,9)+7
+#-------------------------------------------------------
+#sys.stdin = open('1.in','r')
 for _ in range(inp()):
-	n,r = mulip()
-	A = lst()
-	A = sorted(A)
-	A = list(set(A))
-	#print(*A)
-	L,R,k=0,len(A)-1,1
-	r1 = r 
-	while(L<R):
-		if L-R==1:
-			k+=1
-			break
-		if r1>=A[L]:
-			L+=1
-		else:
-			R-=1
-			r1+=r 
-			k+=1
-	print(k)
+    n = inp()
+    s = list(input())
+    print(min(s))
 
-
-
+    

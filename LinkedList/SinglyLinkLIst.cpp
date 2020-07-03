@@ -165,6 +165,51 @@ void deleteData(int data) {
 	}	
 }
 
+void insert_node(int position, int value) {
+    // @params position, integer
+    // @params value, integer
+    Node *tmp = start;
+    Node *node = new Node(value);
+    if(position == 1)
+    {
+        node->next = tmp;
+        start = node;
+        return;
+    
+    }
+    int i = 1;
+    while(i != position - 1)
+    {
+        i++;
+        tmp = tmp->next;
+        
+    }
+    //if(tmp->next==NULL) return;
+    node->next = tmp->next;
+    tmp->next = node;
+    
+}
+
+void delete_node(int position) {
+    // @params position, integer
+    Node *tmp = start;
+    if(tmp==NULL) return;
+    if(position==1){
+    	start = tmp->next;
+    	free(tmp);
+    	return;
+    }
+    int i=0;
+    while(i<position-2 && tmp!=NULL){
+    	tmp = tmp->next;
+    	i++;
+    }
+    if(tmp==NULL) return;
+    tmp->next = tmp->next->next;
+    
+}
+
+
 void display() {
 	/* To shows all values of linkedlist. 
 	*/
@@ -178,34 +223,30 @@ void display() {
 }
 
 int main() {
-	insertLast(1);
-	insertLast(2);
-	insertLast(3);
-	insertLast(4);
-	insertFirst(0);
-	
-	// Linkedlist : 0 1 2 3 4 
-	display();
-	insertBefore(0,5);
-	
-	// Linkedlist : 5 0 1 2 3 4
-	display();
-	insertAfter(2, 2);
-	
-	// Linkedlist : 5 0 1 2 2 3 4
-	display();
-	deleteLast();
-	
-	// Linkedlist : 5 0 1 2 2 3 
-	display();
-	deleteFirst();
-	
-	//Linkedlist : 0 1 2 2 3
-	display();
-	deleteData(2);
-	
-	//Linkedlist : 0 1 2 3
-	display();
-	
-	return 0;
+	freopen("input.in","r",stdin);
+
+	int cases=0, position=0, value=0;
+    cin >> cases;
+    char ch;
+    for(int i=0; i<cases; i++) {
+        cin >> ch;
+        switch(ch) {
+            case 'i':
+                cin >> position;
+                cin >> value;
+                insert_node(position, value);
+                break;
+            case 'd':
+                cin >> position;
+                delete_node(position);
+                break;
+            case 'p':
+                display();
+                cout << "\n";
+                break;
+            default:
+                cout << "Check Your Input\n";
+        }
+    }
+    return 0;
 }
