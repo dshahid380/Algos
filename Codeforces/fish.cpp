@@ -1,42 +1,24 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-struct Time{
-	int hour, minute;
-};
 
-struct Flight{
-	Time departureTime;
-	Time arrivalTime;
-	string flightNo;
-	list<string> listOfDays;
+int  main(){
+	freopen("fish.in", "w", stdout);
+	srand(time(0));
+	int t=5000;
+	cout<<t<<endl;
+	while(t--)
+	{   int n = 50, q = 100;
+		cout<<n<<" "<<q<<endl;
+		for(int i = 0; i < n; ++i)
+	           cout<<rand()%10 + 1<<" "; cout<<endl;
+	       for(int i = 0; i < n; ++i)
+	           cout<<rand()%10 + 1<<" "; cout<<endl;
+	       for(int i = 0; i < q; ++i) {
+	           cout<<rand()%2 + 1<<" "<<rand()%n + 1<<" "<<rand()%n+1<<endl;
+	       }
+	 }
+	
 
-	Flight(Time departureTime,
-				  Time arrivalTime,
-				  string flightNo,
-				  list<string> listOfDays){
-		this->departureTime = departureTime;
-		this->arrivalTime = arrivalTime;
-		this->flightNo = flightNo;
-		this->listOfDays = listOfDays;
-	}
-};
-
-struct TimeTable{
-	string place1, place2;
-	list<Flight> listOfFlights;
-
-	TimeTable(string place1,
-		      string place2,
-		      list<Flight> listOfFlights){
-		this->place1 = place1;
-		this->place2 = place2;
-		this->listOfFlights = listOfFlights;
-	}
-
-	string getTimeTable(){
-		
-	}
-};
-
+}
 
