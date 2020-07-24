@@ -56,47 +56,7 @@ ll modexpo(ll x, ll y, ll p){ ll res = 1;  x = x % p; if (x == 0) return 0; whil
 ll modmul(ll a, ll b){ ll res = 0;a = a%mod;while(b>0){if(b%2==1)res = (res + a)%mod;a = (a<<1) % mod;b = b>>1;}return res % mod;}
 ll modmulinv(ll a){ll v = 0, u = 1,md = mod;if(md==1) return 0;while(a>1){ll d = a/md;ll t = md;md = a % md;a = t;t = v;v = u - d * v;u = t;}if(u<0) u += mod;return u;}
 vector<int> getPrimes(int M){vi p(M+1,1);vector<int>prime;for(int i=2; i*i <= M; ++i){if(p[i]){for(int j = i*i; j<=M; j+=i) p[j] = 0;}}rep(i,2,M) if(p[i]) prime.push_back(i);return prime;}
-void checkAcceptance(){
-    f1.open("output.in",ios::in);
-    f2.open("expected.in",ios::in);
-    while(1){
-        c1=f1.get();
-        c2=f2.get();
-        if(c1!=c2){
-            flag=0;
-            break;
-        }
-        if((c1==EOF)||(c2==EOF))
-            break;
-    }
-    f1.close();
-    f2.close();
-    if(flag)
-        cout<<"Files are same.";
-    else
-        cout<<"Files are not same.";
-}
 
-string s;
-int findval(int l, int r, int type){
-	int val=0;
-	rep(i,l,r+1) if(s[i]!=('a'+type)) val++;
-	return val;
-
-}
-
-int findChange(int l, int r, int type){
-	if(r==l){
-		if(('a'+type)==s[l]) return 0;
-		return 1;
-	}
-
-	int m = (l+r)/2;
-	int tm1 = findval(l,m,type);
-	int tm2 = findval(m+1,r,type);
-	
-	return min(tm1+findChange(m+1,r,type+1), tm2 + findChange(l,m,type+1));
-}
   
 int main() { 
     FASTIO;
@@ -104,28 +64,43 @@ int main() {
         freopen("input.in","r",stdin);
         freopen("output.in","w",stdout);
     #endif
-
-    //vi pm = getPrimes(1005);
     int t=1;
     cin>>t;
     while(t--){
         int n;
         cin>>n;
-        cin>>s;
-        
-    	int ans = findChange(0,n-1,0);
-    	//ans = min(tmp, ans);
+        string s1, s2;
+        cin>>s1;
+        cin>>s2;
+        vi res, tmp;
+        rep(i,0,n-1){
+            if(s1[i]!=s1[i+1]){
+                res.pb(i+1);
+            }
+            if(s2[i]!=s2[i+1]){
+                tmp.pb(i+1);
+            }
 
-    	cout<<ans<<endl;
-
-    }
-
+        }
+        if(s1.back()=='0') res.pb(n);
+        if(s2.back()=='0') tmp.pb(n);
+        rev(i,sz(tmp)-1,0){
+            res.pb(tmp[i]);
+        }
+        cout<<sz(res)<<" ";
+        print(res,sz(res));
     
-    #ifndef ONLINE_JUDGE
-        checkAcceptance();
-    #endif
-    return 0;
+        
+    }
+  return 0;
 } 
+
+
+
+
+
+
+
 
 
 
