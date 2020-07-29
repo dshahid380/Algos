@@ -64,22 +64,29 @@ int main() {
         freopen("input.in","r",stdin);
         freopen("output.in","w",stdout);
     #endif
-
-    //vi pm = getPrimes(1005);
     int t=1;
     cin>>t;
     while(t--){
-        
+        int n;
+        cin>>n;
+        string s;
+        cin>>s;
+        vi ch(26,0);
+        rep(i,0,n){
+        	ch[s[i]-'a']++;
+        }
+        int f = 0;
+        rep(i,0,26){
+        	if(ch[i]&1){
+        		cout<<"NO"<<endl;
+        		f = 1;
+        		break;
+        	}
+        }
+        if(f==0) cout<<"YES"<<endl;
     }
   return 0;
 } 
-
-
-
-
-
-
-
 
 
 

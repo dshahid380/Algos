@@ -64,22 +64,30 @@ int main() {
         freopen("input.in","r",stdin);
         freopen("output.in","w",stdout);
     #endif
-
-    //vi pm = getPrimes(1005);
     int t=1;
     cin>>t;
     while(t--){
-        
+        int n;
+        cin>>n;
+        vl a(n);
+        rep(i,0,n) cin>>a[i];
+        if(n>60){
+        	cout<<"NO"<<endl;
+        	continue;
+        }
+        set<ll> s;
+        rep(i,0,n){
+        	ll sm = 0;
+        	rep(j,i,n){
+        		sm |= a[j];
+        		s.insert(sm);
+        	}
+        }
+        if(sz(s)==(n*(n+1))/2) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
   return 0;
 } 
-
-
-
-
-
-
-
 
 
 

@@ -65,21 +65,13 @@ int main() {
         freopen("output.in","w",stdout);
     #endif
 
-    //vi pm = getPrimes(1005);
     int t=1;
     cin>>t;
     while(t--){
-        
+    	
     }
   return 0;
 } 
-
-
-
-
-
-
-
 
 
 
