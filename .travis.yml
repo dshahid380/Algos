@@ -9,4 +9,4 @@ python:
   - "nightly"  # nightly build
 
 script:
-  - python removeExe.py
+  - python script.py
