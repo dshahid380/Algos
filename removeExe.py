@@ -3,6 +3,10 @@ import os
 path = "../Algos"
 
 def deleteAllUnnecessaryFiles(path):
+	'''
+	Currently it will delete all .class, .exe files 
+	and a file which do not have any extention.
+	'''
 	try:
 		files = os.listdir(path)
 		if len(files)==0:
