@@ -4,7 +4,6 @@ using namespace std;
 //Abbreviation of types
 #define ull unsigned long long int
 #define ll long long int
-#define ld long double
 #define vi vector<int> 
 #define vl vector<ll> 
 #define vvi vector<vector<int>>
@@ -58,11 +57,7 @@ ll modmul(ll a, ll b){ ll res = 0;a = a%mod;while(b>0){if(b%2==1)res = (res + a)
 ll modmulinv(ll a){ll v = 0, u = 1,md = mod;if(md==1) return 0;while(a>1){ll d = a/md;ll t = md;md = a % md;a = t;t = v;v = u - d * v;u = t;}if(u<0) u += mod;return u;}
 vector<int> getPrimes(int M){vi p(M+1,1);vector<int>prime;for(int i=2; i*i <= M; ++i){if(p[i]){for(int j = i*i; j<=M; j+=i) p[j] = 0;}}rep(i,2,M) if(p[i]) prime.push_back(i);return prime;}
 
-vector<ld> v(100005);
-ld n, u;
-
-//https://www.codechef.com/problems/submit/LEARN202
-
+//https://codeforces.com/problemset/problem/1158/A  
 int main() { 
     FASTIO;
     #ifndef ONLINE_JUDGE
@@ -72,45 +67,23 @@ int main() {
 
     //vi pm = getPrimes(1005);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
-        cin>>n>>u;
-        rep(i,0,n) cin>>v[i];
-        ld x=0, y=0, z=0;
-        rep(i,0,n){
-            x += pow(v[i],3);
-            y += pow(v[i],2);
-            z += v[i];
-        }
-        y *= 3;
-        z *= 3;
-
-        ld l = 0, h = 1e4;
-        ld err = 0.01;
-        while(l<=h){
-
-            ld m= l + (h-l)/2;
-            ld t = m, t2 = m*m, t3 = t2*m;
-            ld tm = x + y*t + z*t2 + n*t3;
-            if(abs(tm-u)<=err){
-                cout<<fixed<<setprecision(2)<<m<<endl;
-                break;
-            }
-            if(tm>u){
-                h = m;
-            }else l = m;
-
+        ll n;
+        cin>>n;
+        if(n==1) cout<<1<<endl;
+        else if(n==2) cout<<2<<endl;
+        else{
+        	if(n%2!=0) cout<<n*(n-1)*(n-2)<<endl;
+        	else{
+        		ll ans=max(n*(n-1)*(n-2)/2,(n-2)*(n-1)*(n-3));
+            	ans=max(ans,n*(n-1)*(n-3)/__gcd(n,n-3));
+            	cout<<ans;
+        	}
         }
     }
   return 0;
 } 
-
-
-
-
-
-
-
 
 
 

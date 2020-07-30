@@ -19,10 +19,9 @@ odds = lambda l: len(list(filter(lambda x: x%2!=0, l)))
 evens = lambda l: len(list(filter(lambda x: x%2==0, l)))
 mod = pow(10,9)+7
 #-------------------------------------------------------
-#sys.stdin = open('1.in','r')
+sys.stdin = open('input.in','r')
+sys.stdout = open('output.in','w')
 for _ in range(inp()):
     n = inp()
-    s = list(input())
-    print(min(s))
-
+    print(n)
     
