@@ -28,7 +28,7 @@ def deleteAllUnnecessaryFiles(path):
 		
 
 deleteAllUnnecessaryFiles(path)
-
+print("All unnecessary files have been removed.")
 
 
 	
