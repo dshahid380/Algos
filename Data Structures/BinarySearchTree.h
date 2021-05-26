@@ -14,7 +14,7 @@ public:
 
 
 class BinarySearchTree {
-public:
+
 	Node* root = NULL;
 
 	Node* createNode(int data){
@@ -38,10 +38,6 @@ public:
 		return rootptr;
 	}
 
-	void insert(int data){
-		root = insertNode(data, root);
-	}
-
 	bool findNode(int data, Node* rootptr) {
 		if(rootptr == NULL)
 			return false;
@@ -51,6 +47,60 @@ public:
 			return findNode(data, rootptr->left);
 		else
 			return findNode(data, rootptr->right);
+	}
+
+	Node* findMin(Node* rootptr) {
+		Node* rootptr = root;
+		if(rootptr == NULL)
+			return -1;
+
+		while(rootptr->left != NULL){
+			rootptr = rootptr->left; 
+		}
+		return rootptr;
+    }
+
+    Node* removeNode(Node* rootptr, int data) {
+    	if(rootptr == NULL)
+    		return rootptr;
+
+    	else if(data < rootptr->data)
+    		rootptr->left = removeNode(rootptr->left, data);
+
+    	else if(data > rootptr->data)
+    		rootptr->right = removeNode(rootptr->right, data);
+
+    	else{
+    		if(rootptr->left == NULL && rootptr->right == NULL){
+    			delete rootptr;
+    			rootptr = NULL;
+    		}
+
+    		else if(rootptr->left == NULL){
+    			Node* currentNode = rootptr;
+    			rootptr = rootptr->right;
+    			delete currentNode;
+    		}
+
+    		else if(rootptr->right == NULL){
+    			Node* currentNode = rootptr;
+    			rootptr = rootptr->left;
+    			delete currentNode;
+    		}
+
+    		else{
+    			Node* currentNode = findMin(rootptr->right);
+    			rootptr->data = currentNode->data;
+    			rootptr->right = removeNode(rootptr->right, currentNode->data);
+    		}
+    	}
+
+    	return rootptr;
+    }
+
+public:
+	void insert(int data){
+		root = insertNode(data, root);
 	}
 
 	bool search(int data) {
@@ -80,4 +130,8 @@ public:
 
 		return rootptr->data;
 	}
+
+    void deleteNode(int data) {
+    	root = removeNode(root, data);
+    }
 };
