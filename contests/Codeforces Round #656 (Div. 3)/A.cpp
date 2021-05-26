@@ -55,7 +55,20 @@ ll binpow(ll a, ll b) { if (b == 0) return 1; ll res = binpow(a, b / 2);if (b % 
 ll modexpo(ll x, ll y, ll p){ ll res = 1;  x = x % p; if (x == 0) return 0; while (y > 0){  if (y & 1)  res = (res*x) % p;  y = y>>1;x = (x*x) % p; } return res%mod;}
 ll modmul(ll a, ll b){ ll res = 0;a = a%mod;while(b>0){if(b%2==1)res = (res + a)%mod;a = (a<<1) % mod;b = b>>1;}return res % mod;}
 ll modmulinv(ll a){ll v = 0, u = 1,md = mod;if(md==1) return 0;while(a>1){ll d = a/md;ll t = md;md = a % md;a = t;t = v;v = u - d * v;u = t;}if(u<0) u += mod;return u;}
-vector<int> getPrimes(int M){vi p(M+1,1);vector<int>prime;for(int i=2; i*i <= M; ++i){if(p[i]){for(int j = i*i; j<=M; j+=i) p[j] = 0;}}rep(i,2,M) if(p[i]) prime.push_back(i);return prime;}
+vector<int> getPrimes(int M){
+    vi p(M+1,1);
+    vector<int>prime;
+    for(int i=2; i*i <= M; ++i){
+        if(p[i]){
+            for(int j = i*i; j<=M; j+=i)
+                p[j] = 0;
+        }
+    }
+    rep(i,2,M) 
+        if(p[i]) 
+            prime.push_back(i);
+    return prime;
+}
 
   
 int main() { 
