@@ -81,29 +81,3 @@ public:
 		return rootptr->data;
 	}
 };
-
-int main(){
-	freopen("input.in", "r", stdin);
-	freopen("output.in", "w", stdout);
-	
-	BinarySearchTree bst;
-
-	int n;
-	cin >> n;
-	for(int i = 0; i < n; i++){
-		int x;
-		cin >> x;
-		bst.insert(x);
-	}
-
-	int x;
-	cin >> x;
-	if(bst.search(x))
-		cout << "Found " << x << endl;
-	else
-		cout << "Not Found " << x << endl; 
-
-	cout << bst.getMin() << endl;
-	cout << bst.getMax() << endl;
-
-}
